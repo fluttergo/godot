@@ -300,6 +300,10 @@ namespace GodotTools.Build
 
             if (Internal.GodotIsRealTDouble())
                 buildInfo.CustomProperties.Add("GodotFloat64=true");
+            
+            //https://github.com/dotnet/runtime/blob/b91ed70736f0cd543da00698a7595e578e5a19de/src/coreclr/nativeaot/docs/android-bionic.md
+            if ("platform".Equals("android")||GodotTools.Utils.OS.DotNetOS.Android.Contains("bionic"))
+                buildInfo.CustomProperties.Add("DisableUnsupportedError=true");
 
             return buildInfo;
         }
